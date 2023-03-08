@@ -15,10 +15,19 @@ describe department_data;
 describe formatted department_data;
 
 # For data load from local
-load data local inpath 'file:///tmp/hive_class/depart_data.csv' into table department_data; 
+load data local inpath 'file:///config/workspace/depart_data.csv' into table department_data; 
 
 # Display column name
 set hive.cli.print.header = true;
+
+hadoop fs -ls /tmp
+
+hadoop fs -mkdir /tmp/hive_data_class_2
+
+hadoop fs -put /config/workspace/depart_data.csv /tmp/hive_data_class_2
+
+hadoop fs -ls /tmp/hive_data_class_2
+
 
 # Load data from hdfs location
 load data inpath '/tmp/hive_data_class_2/' into table department_data_from_hdfs;
@@ -51,7 +60,7 @@ create table employee
     > fields terminated by ','                                                                                                                
     > collection items terminated by ':';                                                                                                     
 
-load data local inpath 'file:///tmp/hive_class/array_data.csv' into table employee; 
+load data local inpath 'file:///config/workspace/array_data.csv' into table employee; 
 
 
 # Get element by index in hive array data type
